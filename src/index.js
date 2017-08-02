@@ -5,20 +5,18 @@ import { render } from "react-dom";
 import { Provider } from "react-redux";
 
 import { connectRoutes } from "redux-first-router";
-import { combineReducers, createStore, applyMiddleware, compose } from "redux";
+import { createStore, applyMiddleware, compose } from "redux";
 import createHistory from "history/createBrowserHistory";
 
 import { routes } from "routes";
+import { makeRootReducer } from "reducer";
 import { AppContainer } from "app/AppContainer";
 
 const history = createHistory();
 
-const { reducer, middleware, enhancer } = connectRoutes(history, routes);
+const { reducer: routerReducer, middleware, enhancer } = connectRoutes(history, routes);
 
-const rootReducer = combineReducers({
-    location: reducer,
-});
-
+const rootReducer = makeRootReducer(routerReducer);
 const middlewares = applyMiddleware(middleware);
 const devTools = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
 
