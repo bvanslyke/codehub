@@ -8,11 +8,13 @@ module.exports = {
     devtool: "inline-source-map",
     devServer: {
         contentBase: "./dist",
-        port: 3000
+        port: 3000,
+        historyApiFallback: true
     },
     plugins: [
         new HtmlWebpackPlugin({
-            title: "Development"
+            title: "Development",
+            template: "src/index.ejs"
         })
     ],
     module: {
@@ -31,6 +33,13 @@ module.exports = {
     },
     output: {
         filename: "[name].bundle.js",
-        path: path.resolve(__dirname, "dist") // eslint-disable-line
+        path: path.resolve(__dirname, "dist"), // eslint-disable-line
+        publicPath: "/"
+    },
+    resolve: {
+        modules: [
+            path.join(__dirname, "src"), // eslint-disable-line
+            "node_modules"
+        ]
     }
 };
