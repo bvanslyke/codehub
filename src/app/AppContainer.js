@@ -4,7 +4,7 @@ import { App } from "./App";
 
 function mapStateToProps({location}) {
     return {
-        location        
+        location
     };
 }
 

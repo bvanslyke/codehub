@@ -8,17 +8,12 @@ import { connectRoutes } from "redux-first-router";
 import { combineReducers, createStore, applyMiddleware, compose } from "redux";
 import createHistory from "history/createBrowserHistory";
 
+import { routes } from "routes";
 import { AppContainer } from "app/AppContainer";
 
 const history = createHistory();
 
-const routesMap = { 
-    "routes/PROFILE": "/",
-    "routes/REPO": "/:name/commits/",
-    "route/GIST": "/gist/:id"
-};
-
-const { reducer, middleware, enhancer } = connectRoutes(history, routesMap);
+const { reducer, middleware, enhancer } = connectRoutes(history, routes);
 
 const rootReducer = combineReducers({
     location: reducer,
