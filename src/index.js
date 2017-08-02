@@ -8,7 +8,7 @@ import { connectRoutes } from "redux-first-router";
 import { combineReducers, createStore, applyMiddleware, compose } from "redux";
 import createHistory from "history/createBrowserHistory";
 
-import App from "./App";
+import { AppContainer } from "app/AppContainer";
 
 const history = createHistory();
 
@@ -33,7 +33,7 @@ const store = createStore(
 
 render(
     <Provider store={store}>
-        <App/>
+        <AppContainer/>
     </Provider>,
     document.getElementById("root")
 );
