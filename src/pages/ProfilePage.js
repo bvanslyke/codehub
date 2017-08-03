@@ -12,8 +12,11 @@ export const route = {
     thunk: profileThunk
 };
 
+// 1. Find out the URLs to access a user's gists and repos by calling the users API.
+// 2. In parallel, grab the user's gists and repos.
+// 3. Dispatch an action to broadcast what we've downloaded here.
 async function profileThunk(dispatch, getState) {
-    // TODO: move into helper
+    // TODO: move this into helper. probably want to co-locate with github api reducer
     if (!getState().githubRoutes) {
         const root = await github.get(github.API_ROOT);
         dispatch({type: "GITHUB_ROOT_RECEIVED", payload: root});
@@ -33,6 +36,7 @@ async function profileThunk(dispatch, getState) {
     });
 }
 
+// Store responses to user, repo, and gist APIs for a particular user.
 const initialState = {
     user: {},
     repo: {},

@@ -1,3 +1,6 @@
+// Use our router configuration to determine which container component to render,
+// from the /pages/ subdirectory.
+
 import * as React from "react";
 
 import { containers } from "routes";

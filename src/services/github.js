@@ -1,5 +1,14 @@
+/*
+ * Helper functions for interacting with the Github API v3.
+ * Not much is required here since Github uses a discoverable API and we aren't
+ * really hard-coding API paths.
+ */
+
 import axios from "axios";
 
+// Github encourages consumers to explicitly request an API version,
+// so here's a helper function to do that with axios and pull out the
+// response data.
 export async function get(url) {
     const response = await axios.get(url, {
         headers: {
@@ -10,13 +19,12 @@ export async function get(url) {
     return response.data;
 }
 
-
+// This endpoints provides links to the other Github endpoints we'll use.
 export const API_ROOT = "https://api.github.com";
 
-// TODO: maybe shove gists logic, etc to containers. save just the urls we want using a reducer on
-// the page component who will use that url
-// and move this reducer somewhere else
 
+// Below are functions that take a mapping of API route names to URL patterns (e.g. from API_ROOT)
+// and allow us to extract and manipulate (e.g. to insert a user id) the URL we want to call.
 export function user(urls, username) {
     return urls["user_url"].replace("{user}", username);
 }
@@ -32,6 +40,8 @@ export function gists(userUrls, gistID = null) {
     );
 }
 
+// This reducer saves the response from API_ROOT so we can look up URLs in the future.
+// This should maybe move to a different module.
 export function reducer(state = null, action) {
     switch (action.type) {
     case "GITHUB_ROOT_RECEIVED":
