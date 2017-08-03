@@ -4,7 +4,7 @@
  */
 
 import { combineReducers } from "redux";
-import { reducer as githubApiReducer } from "services/github";
+import { reducer as githubApiReducer } from "data/githubRoot";
 import { reducer as profileReducer } from "pages/ProfilePage";
 
 // Since we require the redux-first-router reducer to be added to

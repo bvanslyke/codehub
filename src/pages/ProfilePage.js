@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import axios from "axios";
 
 import * as github from "services/github";
+import { getGithubRoutes } from "data/githubRoot";
 import { Profile } from "components/Profile";
 
 export const ACTION_TYPE = "route/PROFILE_PAGE";
@@ -16,13 +17,9 @@ export const route = {
 // 2. In parallel, grab the user's gists and repos.
 // 3. Dispatch an action to broadcast what we've downloaded here.
 async function profileThunk(dispatch, getState) {
-    // TODO: move this into helper. probably want to co-locate with github api reducer
-    if (!getState().githubRoutes) {
-        const root = await github.get(github.API_ROOT);
-        dispatch({type: "GITHUB_ROOT_RECEIVED", payload: root});
-    }
+    const githubRoutes = await getGithubRoutes(dispatch, getState);
 
-    const userApi = github.user(getState().githubRoutes, "bvanslyke");
+    const userApi = github.user(githubRoutes, "bvanslyke");
     const user = await github.get(userApi);
 
     const [repos, gists] = await axios.all([

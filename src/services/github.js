@@ -39,14 +39,3 @@ export function gists(userUrls, gistID = null) {
         gistID == null ? "" : `/${gistID}`
     );
 }
-
-// This reducer saves the response from API_ROOT so we can look up URLs in the future.
-// This should maybe move to a different module.
-export function reducer(state = null, action) {
-    switch (action.type) {
-    case "GITHUB_ROOT_RECEIVED":
-        return Object.assign({}, state, action.payload);
-    }
-
-    return state;
-}
