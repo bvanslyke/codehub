@@ -10,7 +10,12 @@ export async function get(url) {
     return response.data;
 }
 
+
 export const API_ROOT = "https://api.github.com";
+
+// TODO: maybe shove gists logic, etc to containers. save just the urls we want using a reducer on
+// the page component who will use that url
+// and move this reducer somewhere else
 
 export function user(urls, username) {
     return urls["user_url"].replace("{user}", username);
