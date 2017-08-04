@@ -5,13 +5,26 @@ import { connect } from "react-redux";
 
 import { App } from "./App";
 
-function mapStateToProps({location}) {
+function mapStateToProps({location, app}) {
+    const loading = app.loading;
     return {
-        location
+        location,
+        loading
     };
 }
 
-const mapDispatchToProps = {
+const initialState = {
+    loading: false
 };
 
-export const AppContainer = connect(mapStateToProps, mapDispatchToProps)(App);
+export function reducer(state = initialState, action) {
+    if (action.meta && action.meta.loading !== undefined) {
+        return Object.assign({}, state, {
+            loading: action.meta.loading
+        });
+    }
+
+    return state;
+} 
+
+export const AppContainer = connect(mapStateToProps)(App);

@@ -1,5 +1,6 @@
 import { connect } from "react-redux";
 
+import { loadingCreator } from "actions";
 import * as github from "services/github";
 import { getGithubRoutes } from "data/githubRoot";
 import { Gist } from "components/Gist";
@@ -12,10 +13,15 @@ export const route = {
 };
 
 async function gistThunk(dispatch, getState) {
+    dispatch(loadingCreator(true));
     const githubRoutes = await getGithubRoutes(dispatch, getState);
     const gistURL = github.gists(githubRoutes, getState().gistPage.id);
     const gist = await github.get(gistURL);
-    dispatch({type: "GIST_RECEIVED", payload: gist });
+    dispatch({
+        type: "GIST_RECEIVED",
+        payload: gist,
+        meta: { loading: false }
+    });
 }
 
 const initialState = {

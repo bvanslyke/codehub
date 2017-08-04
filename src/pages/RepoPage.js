@@ -1,6 +1,8 @@
 import { connect } from "react-redux";
 import { Repo } from "components/Repo";
 
+import { loadingCreator } from "actions";
+
 export const ACTION_TYPE = "route/REPO_PAGE";
 
 export const route = {
@@ -9,7 +11,12 @@ export const route = {
 };
 
 async function repoThunk(dispatch) {
-    dispatch({type: "REPO_RECEIVED", payload: "fake repo data"});
+    dispatch(loadingCreator(true));
+    dispatch({
+        type: "REPO_RECEIVED",
+        payload: "fake repo data",
+        meta: { loading: false }
+    });
 }
 
 export function reducer(state = {}, action) {

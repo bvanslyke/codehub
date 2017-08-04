@@ -9,6 +9,7 @@ import { containers } from "routes";
 
 export function App(props) {
     const type = props.location.type;
+    const loading = props.loading;
     const ChildContainer = containers[type];
 
     return (
@@ -17,7 +18,10 @@ export function App(props) {
                 <Link to={{ type: profileAction }}>Header</Link>
             </h1>
             <div>
-                <ChildContainer />
+                { loading
+                    ? "Loading..."
+                    : <ChildContainer />
+                }
             </div>
             <footer>footer</footer>
         </div>

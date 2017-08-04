@@ -2,6 +2,7 @@
 import { connect } from "react-redux";
 import axios from "axios";
 
+import { loadingCreator } from "actions";
 import * as github from "services/github";
 import { getGithubRoutes } from "data/githubRoot";
 import { Profile } from "components/Profile";
@@ -17,6 +18,7 @@ export const route = {
 // 2. In parallel, grab the user's gists and repos.
 // 3. Dispatch an action to broadcast what we've downloaded here.
 async function profileThunk(dispatch, getState) {
+    dispatch(loadingCreator(true));
     const githubRoutes = await getGithubRoutes(dispatch, getState);
 
     const userApi = github.user(githubRoutes, "bvanslyke");
@@ -29,7 +31,8 @@ async function profileThunk(dispatch, getState) {
 
     dispatch({
         type: "PROFILE_RECEIVED",
-        payload: { user, repos, gists }
+        payload: { user, repos, gists },
+        meta: { loading: false }
     });
 }
 
