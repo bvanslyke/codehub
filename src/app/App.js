@@ -10,7 +10,7 @@ export function App(props) {
     const ChildContainer = containers[type];
 
     return (
-        <div>
+        <div className="container">
             <h1>header</h1>
             <div>
                 <ChildContainer />

@@ -36,7 +36,7 @@ async function profileThunk(dispatch, getState) {
 // Store responses to user, repo, and gist APIs for a particular user.
 const initialState = {
     user: {},
-    repo: {},
+    repos: {},
     gists: {}
 };
 
@@ -50,8 +50,8 @@ export function reducer(state = initialState, action) {
 }
 
 function mapStateToProps({ profile }) {
-    const { user, repo, gists } = profile;
-    return { user, repo, gists };
+    const { user, repos, gists } = profile;
+    return { user, repos, gists };
 }
 
 const mapDispatchToProps = {
