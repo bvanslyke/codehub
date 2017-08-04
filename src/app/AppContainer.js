@@ -1,5 +1,5 @@
 // This just hooks into redux's store to retrieve our router's location
-// and provide it to <App>.
+// and loading status and provide it to <App>.
 
 import { connect } from "react-redux";
 
