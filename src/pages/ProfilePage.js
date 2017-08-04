@@ -6,6 +6,7 @@ import { loadingCreator } from "actions";
 import * as github from "services/github";
 import { getGithubRoutes } from "data/githubRoot";
 import { Profile } from "components/Profile";
+import { GITHUB_USER } from "config"; 
 
 export const ACTION_TYPE = "route/PROFILE_PAGE";
 
@@ -21,7 +22,7 @@ async function profileThunk(dispatch, getState) {
     dispatch(loadingCreator(true));
     const githubRoutes = await getGithubRoutes(dispatch, getState);
 
-    const userApi = github.user(githubRoutes, "bvanslyke");
+    const userApi = github.user(githubRoutes, GITHUB_USER);
     const user = await github.get(userApi);
 
     const [repos, gists] = await axios.all([

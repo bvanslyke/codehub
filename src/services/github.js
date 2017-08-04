@@ -25,14 +25,25 @@ export const API_ROOT = "https://api.github.com";
 
 // Below are functions that take a mapping of API route names to URL patterns (e.g. from API_ROOT)
 // and allow us to extract and manipulate (e.g. to insert a user id) the URL we want to call.
+
+// Profile info for a specific user
 export function user(urls, username) {
     return urls["user_url"].replace("{user}", username);
 }
 
+// List of repos for a user
 export function repos(userUrls) {
     return userUrls["repos_url"];
 }
 
+// A specific repo
+export function repo(urls, owner, repoName) {
+    return urls["repository_url"]
+        .replace("{owner}", owner)
+        .replace("{repo}", repoName);
+}
+
+// List of gists for a user, or if gistID specified then an individual gist.
 export function gists(urls, gistID = null) {
     return urls["gists_url"].replace(
         "{/gist_id}",
