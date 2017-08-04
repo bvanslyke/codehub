@@ -7,17 +7,27 @@ import { ACTION_TYPE as gistAction } from "pages/GistPage";
 export function Profile({user, repos, gists}) {
     return (
         <div>
-            <UserSummary {...user} />
+            <div className="row">
+                <div className="col-md-12">
+                    <UserSummary {...user} />
+                </div>
+            </div>
 
-            <h3>Repositories</h3>
-            {repos.map((repo, index) => (
-                <RepoSummary {...repo} key={index} />
-            ))}
+            <div className="row">
+                <div className="col-md-6">
+                    <h3>Repositories</h3>
+                    {repos.map((repo, index) => (
+                        <RepoSummary {...repo} key={index} />
+                    ))}
+                </div>
 
-            <h3>Gists</h3>
-            {gists.map((gist, index) => (
-                <GistSummary {...gist} key={index} />
-            ))}
+                <div className="col-md-6">
+                    <h3>Gists</h3>
+                    {gists.map((gist, index) => (
+                        <GistSummary {...gist} key={index} />
+                    ))}
+                </div>
+            </div>
         </div>
     );
 }
@@ -25,10 +35,18 @@ export function Profile({user, repos, gists}) {
 // Display the user's name, Location, and image (either avatar_url or gravatar_url)
 function UserSummary({name, location, avatar_url}) {
     return (
-        <div>
-            <h3>User: {name}</h3>
-            <p>Location: {location}</p>
-            <img src={avatar_url} alt={`Avatar for ${name}`} />
+        <div className="panel panel-default">
+            <div className="panel-body">
+                <div className="media">
+                    <div className="media-left">
+                        <img src={avatar_url} alt={`Avatar for ${name}`} width="64" />
+                    </div>
+                    <div className="media-body">
+                        <h4 className="media-heading">{name}</h4>
+                        Location: {location}
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }
@@ -36,17 +54,30 @@ function UserSummary({name, location, avatar_url}) {
 // Display repository name, repository description, programming language, number of watchers, number of forks.
 function RepoSummary({ name, description, language, watchers_count, forks_count }) {
     return (
-        <div>
-            <h4>
-                {name}
-                <Link to={{ type: repoAction, payload: { name } }}>
-                    {name}
-                </Link>
-            </h4>
-            <p>{description}</p>
-            <p>language: {language}</p>
-            <p>forks: {forks_count}</p>
-            <p>watchers: {watchers_count}</p>
+        <div className="panel panel-default">
+            <div className="panel-heading">
+                <h3 className="panel-title">
+                    <Link to={{ type: repoAction, payload: { name } }}>
+                        {name}
+                    </Link>
+                </h3>
+            </div>
+            <div className="panel-body">
+                <p>{description}</p>
+            </div>
+            <div className="panel-footer">
+                {language}{" "}
+                <span className="badge">
+                    <span className="glyphicon glyphicon-cutlery"></span>
+                    &nbsp;
+                    {forks_count} 
+                </span>
+                <span className="badge">
+                    <span className="glyphicon glyphicon-eye-open"></span>
+                    &nbsp;
+                    {watchers_count}
+                </span>
+            </div>
         </div>
     );
 }
@@ -56,13 +87,17 @@ function GistSummary({ id, description, files  }) {
     const fileKeys = Object.keys(files);
     const {filename} = files[fileKeys[0]];
     return (
-        <div>
-            <h4>
-                <Link to={{type: gistAction, payload: { id }}}>
-                    {filename}
-                </Link>
-            </h4>
-            <p>{description}</p>
+        <div className="panel panel-default">
+            <div className="panel-heading">
+                <h3 className="panel-title">
+                    <Link to={{type: gistAction, payload: { id }}}>
+                        {filename}
+                    </Link>
+                </h3>
+            </div>
+            <div className="panel-body">
+                <p>{description}</p>
+            </div>
         </div>
     );
 }

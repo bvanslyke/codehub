@@ -6,6 +6,7 @@ import Link from "redux-first-router-link";
 
 import { ACTION_TYPE as profileAction } from "pages/ProfilePage";
 import { containers } from "routes";
+import { GITHUB_USER } from "config";
 
 export function App(props) {
     const type = props.location.type;
@@ -14,16 +15,29 @@ export function App(props) {
 
     return (
         <div className="container">
-            <h1>
-                <Link to={{ type: profileAction }}>Header</Link>
-            </h1>
+            <div className="row">
+                <div className="col-md-12">
+                    <nav className="navbar navbar-default">
+                        <div className="container-fluid">
+                            <div className="navbar-header">
+                                <Link 
+                                    to={{ type: profileAction }}
+                                    className="navbar-brand"
+                                >
+                                    CodeHub: { GITHUB_USER }
+                                </Link>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+
             <div>
                 { loading
                     ? "Loading..."
                     : <ChildContainer />
                 }
             </div>
-            <footer>footer</footer>
         </div>
     );
 }
