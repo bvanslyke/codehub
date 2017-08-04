@@ -96,7 +96,7 @@ function GistSummary({ id, description, files  }) {
                 </h3>
             </div>
             <div className="panel-body">
-                <p>{description}</p>
+                <p>{description && description.length > 0 ? description : "(No description)"}</p>
             </div>
         </div>
     );
