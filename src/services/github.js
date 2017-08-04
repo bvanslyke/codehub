@@ -9,11 +9,12 @@ import axios from "axios";
 // Github encourages consumers to explicitly request an API version,
 // so here's a helper function to do that with axios and pull out the
 // response data.
-export async function get(url) {
+export async function get(url, params = {}) {
     const response = await axios.get(url, {
         headers: {
             Accept: "application/vnd.github.v3+json"
-        }
+        },
+        params
     });
 
     return response.data;
@@ -41,6 +42,14 @@ export function repo(urls, owner, repoName) {
     return urls["repository_url"]
         .replace("{owner}", owner)
         .replace("{repo}", repoName);
+}
+
+// List commits for a repo
+export function commits(repoUrls, owner, repoName) {
+    return repoUrls["commits_url"]
+        .replace("{owner}", owner)
+        .replace("{repo}", repoName)
+        .replace("{/sha}", "");
 }
 
 // List of gists for a user, or if gistID specified then an individual gist.

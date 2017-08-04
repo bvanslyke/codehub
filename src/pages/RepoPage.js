@@ -16,20 +16,27 @@ export const route = {
 async function repoThunk(dispatch, getState) {
     dispatch(loadingCreator(true));
 
+    const repoName = getState().repoPage.name;
+
     const githubRoutes = await getGithubRoutes(dispatch, getState);
-    const repoURL = github.repo(githubRoutes, GITHUB_USER, getState().repoPage.name);
+    const repoURL = github.repo(githubRoutes, GITHUB_USER, repoName);
     const repo = await github.get(repoURL);
 
+    const commitsURL = github.commits(repo, GITHUB_USER, repoName);
+    const monthAgo = new Date();
+    monthAgo.setMonth(monthAgo.getMonth() - 1); 
+    const commits = await github.get(commitsURL, { since: monthAgo.toISOString() });
+
     dispatch({
-        type: "REPO_RECEIVED",
-        payload: repo,
+        type: "COMMITS_RECEIVED",
+        payload: commits,
         meta: { loading: false }
     });
 }
 
 const initialState = {
     name: undefined,
-    repo: {}
+    commits: []
 };
 
 export function reducer(state = initialState, action) {
@@ -38,9 +45,9 @@ export function reducer(state = initialState, action) {
         return Object.assign({}, state, {
             name: action.payload.name
         });
-    case "REPO_RECEIVED":
+    case "COMMITS_RECEIVED":
         return Object.assign({}, state, {
-            repo: action.payload
+            commits: action.payload
         });
     default:
     }
@@ -49,8 +56,7 @@ export function reducer(state = initialState, action) {
 }
 
 function mapStateToProps({repoPage}) {
-    const { repo } = repoPage;
-    return repo;
+    return repoPage;
 }
 
 export const RepoPageContainer = connect(mapStateToProps)(Repo);
