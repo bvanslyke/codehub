@@ -26,8 +26,4 @@ function mapStateToProps(state) {
     return state;
 }
 
-const mapDispatchToProps = {
-
-};
-
-export const RepoPageContainer = connect(mapStateToProps, mapDispatchToProps)(Repo);
+export const RepoPageContainer = connect(mapStateToProps)(Repo);

@@ -54,8 +54,4 @@ function mapStateToProps({ profilePage }) {
     return { user, repos, gists };
 }
 
-const mapDispatchToProps = {
-
-};
-
-export const ProfilePageContainer = connect(mapStateToProps, mapDispatchToProps)(Profile);
+export const ProfilePageContainer = connect(mapStateToProps)(Profile);

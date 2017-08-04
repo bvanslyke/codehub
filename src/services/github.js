@@ -33,8 +33,8 @@ export function repos(userUrls) {
     return userUrls["repos_url"];
 }
 
-export function gists(userUrls, gistID = null) {
-    return userUrls["gists_url"].replace(
+export function gists(urls, gistID = null) {
+    return urls["gists_url"].replace(
         "{/gist_id}",
         gistID == null ? "" : `/${gistID}`
     );

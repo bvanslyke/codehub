@@ -2,7 +2,9 @@
 // from the /pages/ subdirectory.
 
 import * as React from "react";
+import Link from "redux-first-router-link";
 
+import { ACTION_TYPE as profileAction } from "pages/ProfilePage";
 import { containers } from "routes";
 
 export function App(props) {
@@ -11,7 +13,9 @@ export function App(props) {
 
     return (
         <div className="container">
-            <h1>header</h1>
+            <h1>
+                <Link to={{ type: profileAction }}>Header</Link>
+            </h1>
             <div>
                 <ChildContainer />
             </div>
