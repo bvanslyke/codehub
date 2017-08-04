@@ -28,7 +28,7 @@ export function Repo(props) {
             <div className="panel panel-default">
                 <div className="panel-heading">Commits since last month</div>
                 <div className="panel-body">
-                    <table className="table table-striped">
+                    <table className="table table-striped table-responsive">
                         <thead>
                             <th>Author</th>
                             <th>Message</th>
