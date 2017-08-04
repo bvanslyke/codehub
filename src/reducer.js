@@ -6,6 +6,8 @@
 import { combineReducers } from "redux";
 import { reducer as githubApiReducer } from "data/githubRoot";
 import { reducer as profileReducer } from "pages/ProfilePage";
+import { reducer as gistReducer } from "pages/GistPage";
+import { reducer as repoReducer } from "pages/RepoPage";
 
 // Since we require the redux-first-router reducer to be added to
 // our root-level reducer, and redux-first-router's reducer needs
@@ -14,6 +16,8 @@ export function makeRootReducer(routerReducer) {
     return combineReducers({
         location: routerReducer,
         githubRoutes: githubApiReducer,
-        profile: profileReducer
+        profilePage: profileReducer,
+        gistPage: gistReducer,
+        repoPage: repoReducer
     });
 }

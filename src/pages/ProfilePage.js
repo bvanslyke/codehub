@@ -49,8 +49,8 @@ export function reducer(state = initialState, action) {
     return state;
 }
 
-function mapStateToProps({ profile }) {
-    const { user, repos, gists } = profile;
+function mapStateToProps({ profilePage }) {
+    const { user, repos, gists } = profilePage;
     return { user, repos, gists };
 }
 

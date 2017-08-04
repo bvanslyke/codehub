@@ -1,9 +1,14 @@
 import * as React from "react";
+import Link from "redux-first-router-link";
+
+import { ACTION_TYPE as repoAction } from "pages/RepoPage";
+import { ACTION_TYPE as gistAction } from "pages/GistPage";
 
 export function Profile({user, repos, gists}) {
     return (
         <div>
             <UserSummary {...user} />
+
             <h3>Repositories</h3>
             {repos.map((repo, index) => (
                 <RepoSummary {...repo} key={index} />
@@ -32,7 +37,12 @@ function UserSummary({name, location, avatar_url}) {
 function RepoSummary({ name, description, language, watchers_count, forks_count }) {
     return (
         <div>
-            <h4>{name}</h4>
+            <h4>
+                {name}
+                <Link to={{ type: repoAction, payload: { name } }}>
+                    {name}
+                </Link>
+            </h4>
             <p>{description}</p>
             <p>language: {language}</p>
             <p>forks: {forks_count}</p>
@@ -42,12 +52,16 @@ function RepoSummary({ name, description, language, watchers_count, forks_count 
 }
 
 // Display the name and description of the gist
-function GistSummary({ description, files  }) {
+function GistSummary({ id, description, files  }) {
     const fileKeys = Object.keys(files);
     const {filename} = files[fileKeys[0]];
     return (
         <div>
-            <h4>{filename}</h4>
+            <h4>
+                <Link to={{type: gistAction, payload: { id }}}>
+                    {filename}
+                </Link>
+            </h4>
             <p>{description}</p>
         </div>
     );
