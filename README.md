@@ -15,3 +15,8 @@ npm install
 npm start
 ```
 
+Then visit http://localhost:3000/ in your browser.
+
+# Configuring
+
+Edit `src/config.js` to select the Github user that will be displayed when the app starts up.
