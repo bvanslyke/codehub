@@ -45,6 +45,8 @@ export function repo(urls, owner, repoName) {
 }
 
 // List commits for a repo
+// n.b.: Note if the URLs object comes from a repo object, then `owner` and `repoName`
+// will be ignored because the URL template vars won't be there.
 export function commits(repoUrls, owner, repoName) {
     return repoUrls["commits_url"]
         .replace("{owner}", owner)

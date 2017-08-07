@@ -23,9 +23,11 @@ const { reducer: routerReducer, middleware, enhancer } = connectRoutes(history, 
 // 2. Redux store
 const rootReducer = makeRootReducer(routerReducer);
 const middlewares = applyMiddleware(middleware);
-const devTools = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+    : compose;
 const store = createStore(
-    rootReducer, compose(enhancer, middlewares, devTools)
+    rootReducer, composeEnhancers(enhancer, middlewares)
 );
 
 // 3. React root component

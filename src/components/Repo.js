@@ -30,9 +30,11 @@ export function Repo(props) {
                 <div className="panel-body">
                     <table className="table table-striped table-responsive">
                         <thead>
-                            <th>Author</th>
-                            <th>Message</th>
-                            <th>SHA</th>
+                            <tr>
+                                <th>Author</th>
+                                <th>Message</th>
+                                <th>SHA</th>
+                            </tr>
                         </thead>
                         <tbody>
                             {props.commits.map((commit, index) => (
