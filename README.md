@@ -1,7 +1,10 @@
 
-# Simple GitHub viewer written with React, redux, and react-first-router.
+# Simple GitHub profile viewer
 
-Uses a feature-based organization style and takes advantage of the discoverability of Github's REST API.
+- Lists repos and allows you to view the latest commits for each of them.
+- Lists gists and allows you to view their contents.
+- Written with React, redux, and react-first-router.
+- Takes advantage of the discoverability of Github's REST API.
 
 ## Running
 
