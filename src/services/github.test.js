@@ -46,30 +46,3 @@ describe("Github service", () => {
     });
 });
 
-export function user(urls, username) {
-    return urls["user_url"].replace("{user}", username);
-}
-
-
-// A specific repo
-export function repo(urls, owner, repoName) {
-    return urls["repository_url"]
-        .replace("{owner}", owner)
-        .replace("{repo}", repoName);
-}
-
-// List commits for a repo
-export function commits(repoUrls, owner, repoName) {
-    return repoUrls["commits_url"]
-        .replace("{owner}", owner)
-        .replace("{repo}", repoName)
-        .replace("{/sha}", "");
-}
-
-// List of gists for a user, or if gistID specified then an individual gist.
-export function gists(urls, gistID = null) {
-    return urls["gists_url"].replace(
-        "{/gist_id}",
-        gistID == null ? "" : `/${gistID}`
-    );
-}
